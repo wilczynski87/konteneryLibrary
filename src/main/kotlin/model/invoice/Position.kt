@@ -1,6 +1,10 @@
 package com.kontenery.library.model.invoice
 
+import com.kontenery.library.model.Contract
+import com.kontenery.library.model.Product
 import kotlinx.serialization.Serializable
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 @Serializable
 data class Position(
@@ -22,13 +26,13 @@ data class Position(
             }
 
             fun getQuantity():BigDecimal {
-                return if(contract.product is Yard) {
-                    (contract.product as Yard).quantity?.toBigDecimal() ?: BigDecimal(1)
+                return if(contract.product is Product.Yard) {
+                    (contract.product as Product.Yard).quantity?.toBigDecimal() ?: BigDecimal(1)
                 } else BigDecimal(1)
             }
 
             fun unitPriceCalculate(): BigDecimal? {
-                return if(contract.product is Yard) {
+                return if(contract.product is Product.Yard) {
                     contract.netPrice?.divide(getQuantity())?.setScale(2, RoundingMode.HALF_UP)
                 } else contract.netPrice?.setScale(2, RoundingMode.HALF_UP)
             }
