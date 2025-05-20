@@ -1,6 +1,7 @@
 package com.kontenery.library.model
 
 import com.kontenery.library.serializers.BigDecimalSerializer
+import com.kontenery.library.serializers.LocalDateSerializer
 import kotlinx.serialization.Serializable
 import java.math.BigDecimal
 import kotlinx.datetime.LocalDate
@@ -11,7 +12,9 @@ data class Client(
     val clientPrivate: ClientPersonalData? = null,
     val clientCompany: ClientCompanyData? = null,
     val isActive: Boolean? = null,
+    @Serializable(with = LocalDateSerializer::class)
     val createdAt: LocalDate? = null,
+    @Serializable(with = LocalDateSerializer::class)
     val updatedAt: LocalDate? = null,
     val invoiceTitle: String? = null,
 ) {
