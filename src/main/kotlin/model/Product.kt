@@ -14,6 +14,7 @@ sealed class Product {
     abstract val name: String?
     abstract val location: String?
     abstract val type: ProductType?
+    abstract var client: Client?
 
     @Serializable
     @SerialName("CONTAINER")
@@ -22,6 +23,7 @@ sealed class Product {
         override val name: String? = null,
         override val location: String? = null,
         override val type: ProductType? = ProductType.CONTAINER,
+        override var client: Client? = null,
         val length: String? = null,
         val height: String? = null,
         val color: String? = null,
@@ -42,7 +44,8 @@ sealed class Product {
         override val id: Long? = null,
         override val name: String? = null,
         override val location: String? = null,
-        override val type: ProductType? = ProductType.CONTAINER,
+        override val type: ProductType? = ProductType.YARD,
+        override var client: Client? = null,
         val quantity: Long? = null
     ): Product() {
         val uom: String = "m2"

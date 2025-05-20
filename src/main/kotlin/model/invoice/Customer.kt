@@ -1,6 +1,7 @@
 package com.kontenery.library.model.invoice
 
 import com.kontenery.library.model.Address
+import com.kontenery.library.model.Client
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.Serializable
 
@@ -27,6 +28,19 @@ sealed class Subject {
         override var invoiceNumber:String? = null,
         val salutation:String = "Drogi Kliencie",
     ): Subject() {
+        companion object {
+            fun toCustomer(client: Client, invoiceNumber: String? = null): Customer {
+                return Customer(
+                    name = client.getName(),
+                    address = client.clientCompany?.address ?: client.clientPrivate?.address ?: Address(),
+                    nip = client.clientCompany?.nip ?: "",
+                    email = client.clientCompany?.email ?: client.clientPrivate?.email ?: "",
+                    phone = client.clientCompany?.phone ?: client.clientPrivate?.phone ?: "",
+                    invoiceNumber = invoiceNumber,
+                    salutation = client.clientPrivate?.salutation ?: "Drogi Kliencie"
+                )
+            }
+        }
     }
 
     @Serializable
