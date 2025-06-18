@@ -27,3 +27,9 @@ publishing {
         }
     }
 }
+tasks.withType<Jar> {
+    manifest {
+        attributes["Implementation-Title"] = "MyLibrary"
+        attributes["Implementation-Version"] = version
+    }
+}

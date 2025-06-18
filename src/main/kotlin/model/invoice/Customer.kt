@@ -53,14 +53,25 @@ sealed class Subject {
         override var invoiceNumber:String?,
         val account: String = "50 1950 0001 2006 0023 6241 0001"
     ): Subject() {
-        fun personal(invoiceId: Long): Seller = Seller(
-            "Karol Wilczyński",
-            Address(null, "Aleksandra Ostrowskiego", "102", "Wrocław", "53-238", "PL"),
-            "",
-            "wilczynski87@gmail.com",
-            "+48 507 036 484",
-            invoiceNumber,
-            "11 2490 1044 0000 4200 8845 2192"
-        )
+        companion object {
+            fun personal(invoiceNumber: String?): Seller = Seller(
+                "Karol Wilczyński",
+                Address(null, "Aleksandra Ostrowskiego", "102", "Wrocław", "53-238", "PL"),
+                "8942957044",
+                "wilczynski87@gmail.com",
+                "+48 507 036 484",
+                invoiceNumber,
+                "11 2490 1044 0000 4200 8845 2192"
+            )
+            fun company(invoiceNumber: String?): Seller = Seller(
+                name = "Karol Wilczyński",
+                address = Address(null, "ul. Ostrowskiego", "102", "53-238", "Wrocław"),
+                nip = "8942957044",
+                email = "parkingostrowskiego@gmail.com",
+                phone = "+48 507 036 484",
+                invoiceNumber = null,
+                account = "50 1950 0001 2006 0023 6241 0001"
+            )
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.kontenery.library.model
 
-import com.kontenery.library.utils.ProductType
 import com.kontenery.library.serializers.ByteArrayAsBase64Serializer
 import com.kontenery.library.serializers.LocalDateSerializer
 import kotlinx.datetime.LocalDate
@@ -33,7 +32,7 @@ sealed class Product {
         @Serializable(with = ByteArrayAsBase64Serializer::class) // Custom serializer for byte arrays
         val photo: ByteArray? = null,
     ): Product() {
-        val uom: String = "m2"
+        val uom: String = "szt"
     }
 
     @Serializable

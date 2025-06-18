@@ -24,7 +24,7 @@ data class Client(
     }
 
     fun needInvoice():Boolean {
-        return clientCompany?.needInvoice == null || clientCompany.needInvoice == false
+        return clientCompany?.needInvoice == true
     }
 }
 
@@ -62,6 +62,6 @@ data class ClientOnList(
     val contracts: String?,
     val active: Boolean,
     val invoice: Boolean,
-    val lastBill: LocalDate?
+    val lastBill: LocalDate?,
 ) {
 }
