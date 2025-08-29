@@ -8,13 +8,13 @@ import java.math.RoundingMode
 
 @Serializable
 data class Position(
-    val productName:String?,
-    val unitPrice:String?,
-    val quantity:String?,
-    val price:String?,
+    val productName:String? = null,
+    val unitPrice:String? = null,
+    val quantity:String? = null,
+    val price:String? = null,
     val vatRate:String? = "23",
-    val vatAmount:String?,
-    val priceWithVat:String?,
+    val vatAmount:String? = null,
+    val priceWithVat:String? = null,
 ) {
     companion object {
         fun toPosition(contract: Contract): Position {

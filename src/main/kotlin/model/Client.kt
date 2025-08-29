@@ -17,6 +17,7 @@ data class Client(
     @Serializable(with = LocalDateSerializer::class)
     val updatedAt: LocalDate? = null,
     val invoiceTitle: String? = null,
+    val bankAccounts: List<String>? = null
 ) {
     fun getName():String {
         return clientCompany?.name
@@ -59,9 +60,20 @@ data class ClientOnList(
     val name: String,
     @Serializable(with = BigDecimalSerializer::class)
     val paymentsOverdue: BigDecimal? = BigDecimal.ZERO,
-    val contracts: String?,
+    val contracts: List<String>?,
     val active: Boolean,
     val invoice: Boolean,
     val lastBill: LocalDate?,
+    val clientType: ClientType = ClientType.UNKNOWN  // ENUM for individual/company
 ) {
+    enum class ClientType { INDIVIDUAL, COMPANY, UNKNOWN }
 }
+
+@Serializable
+data class ClientBankAccount(
+    val id: Long? = null,
+    val bankAccount: String? = null,
+    val client: Client? = null,
+    @Serializable(with = LocalDateSerializer::class)
+    val createdAt: LocalDate? = null,
+)

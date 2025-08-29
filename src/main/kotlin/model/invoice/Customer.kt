@@ -12,8 +12,8 @@ const val customerName:String = "CUSTOMER"
 @Polymorphic
 sealed class Subject {
     abstract val name:String
-    abstract val address: Address
-    abstract val nip:String
+    abstract val address: Address?
+    abstract val nip:String?
     abstract val email:String
     abstract val phone:String?
     abstract var invoiceNumber:String?
@@ -21,12 +21,13 @@ sealed class Subject {
     @Serializable
     data class Customer(
         override val name:String,
-        override val address: Address,
-        override val nip:String,
+        override val address: Address? = null,
+        override val nip:String? = null,
         override val email:String,
         override val phone:String? = null,
         override var invoiceNumber:String? = null,
         val salutation:String = "Drogi Kliencie",
+        val client:Client? = null,
     ): Subject() {
         companion object {
             fun toCustomer(client: Client, invoiceNumber: String? = null): Customer {
@@ -37,7 +38,8 @@ sealed class Subject {
                     email = client.clientCompany?.email ?: client.clientPrivate?.email ?: "",
                     phone = client.clientCompany?.phone ?: client.clientPrivate?.phone ?: "",
                     invoiceNumber = invoiceNumber,
-                    salutation = client.clientPrivate?.salutation ?: "Drogi Kliencie"
+                    salutation = client.clientPrivate?.salutation ?: "Drogi Kliencie",
+                    client = client,
                 )
             }
         }
@@ -50,7 +52,7 @@ sealed class Subject {
         override val nip:String = "8942957044",
         override val email:String = "parkingostrowskiego@gmail.com",
         override val phone:String? = "+48 507 036 484",
-        override var invoiceNumber:String?,
+        override var invoiceNumber:String? = null,
         val account: String = "50 1950 0001 2006 0023 6241 0001"
     ): Subject() {
         companion object {

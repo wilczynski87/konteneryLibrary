@@ -5,5 +5,8 @@ enum class Path(val path: String) {
     UTILITIES_INVOICE_PDF("invoices/fakturaMedia"),
     PERIODIC_MAIL("mails/invoicePeriodic"),
     UTILITIES_MAIL("mails/invoiceUtilities"),
+    PRINT_MAIL("mails/printInvoices"),
+    REMAINDER_MAIL("mails/remainder"),
+    ANNUAL_REVALUATION_MAIL("mails/annualRevaluation"),
     FONT("templates/thymeleaf/fonts")
 }

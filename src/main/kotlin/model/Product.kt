@@ -46,5 +46,4 @@ sealed class Product {
     ): Product() {
         val uom: String = "m2"
     }
-
 }
