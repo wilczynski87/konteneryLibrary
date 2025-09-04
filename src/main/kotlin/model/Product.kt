@@ -46,4 +46,15 @@ sealed class Product {
     ): Product() {
         val uom: String = "m2"
     }
+
+    companion object {
+        fun createProductName(product: Product): String {
+            val name = when(product) {
+                is Container -> "Kontener ${product.length} - ${product.location}"
+                is Yard -> "Plac ${product.quantity}m2"
+            }
+            return name
+        }
+    }
 }
+

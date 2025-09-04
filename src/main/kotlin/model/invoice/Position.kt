@@ -19,21 +19,22 @@ data class Position(
     companion object {
         fun toPosition(contract: Contract): Position {
             fun vatCalculate(): BigDecimal {
-                val netPrice: BigDecimal = contract.netPrice ?: return BigDecimal.ZERO
-                val vatRate: BigDecimal = contract.vatRate
+                val netPrice: BigDecimal = contract.netPrice?.setScale(2, RoundingMode.HALF_UP) ?: return BigDecimal.ZERO
+                val vatRate: BigDecimal = contract.vatRate.setScale(2, RoundingMode.HALF_UP)
                 val vatProcent = vatRate.divide(BigDecimal(100), 2, RoundingMode.HALF_UP)
                 return netPrice.multiply(vatProcent).setScale(2, RoundingMode.HALF_UP)
             }
 
             fun getQuantity():BigDecimal {
                 return if(contract.product is Product.Yard) {
-                    (contract.product as Product.Yard).quantity?.toBigDecimal() ?: BigDecimal(1)
+                    (contract.product as Product.Yard).quantity?.toBigDecimal()?.setScale(2, RoundingMode.HALF_UP)
+                        ?: BigDecimal(1)
                 } else BigDecimal(1)
             }
 
             fun unitPriceCalculate(): BigDecimal? {
                 return if(contract.product is Product.Yard) {
-                    contract.netPrice?.divide(getQuantity())?.setScale(2, RoundingMode.HALF_UP)
+                    contract.netPrice?.divide(getQuantity(), 2, RoundingMode.HALF_UP)
                 } else contract.netPrice?.setScale(2, RoundingMode.HALF_UP)
             }
 
