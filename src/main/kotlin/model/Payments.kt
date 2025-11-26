@@ -20,7 +20,9 @@ data class Payment(
     val toAccount: SellerAccount? = SellerAccount.BUSSINESS,
     val fromAccount: String? = null,
     val title: String? = null,
-    val forInvoices: List<Invoice> = listOf()
+    val forInvoices: List<Invoice> = listOf(),
+    val referenceNumber: String? = null
+
     ) {
 
     fun toDto(): PaymentDto {
@@ -33,7 +35,8 @@ data class Payment(
             toAccount = this.toAccount?.accountNumber,
             fromAccount = this.fromAccount,
             title = this.title,
-            forInvoices = this.forInvoices.mapNotNull { it.invoiceNumber }
+            forInvoices = this.forInvoices.mapNotNull { it.invoiceNumber },
+            referenceNumber = this.referenceNumber
         )
     }
 }
@@ -51,6 +54,7 @@ data class PaymentDto(
     val fromAccount: String? = null,
     val title: String? = null,
     val forInvoices: List<String>? = null,
+    val referenceNumber: String? = null,
 ) {
 //    fun toPayment(): Payment {
 //        return Payment(
