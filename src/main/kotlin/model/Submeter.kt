@@ -9,5 +9,6 @@ data class Submeter(
     val clientId: Long? = null,
     val location: String? = null,
     val utilityType: UtilityType? = null,
-    val readings: List<Reading> = emptyList()
+    val readings: List<Reading> = emptyList(),
+    val number: String? = null,
 )
