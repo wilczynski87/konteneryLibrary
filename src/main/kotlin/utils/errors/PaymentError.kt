@@ -4,7 +4,7 @@ import com.kontenery.library.model.Payment
 import kotlinx.serialization.Serializable
 
 @Serializable
-class PaymentError(
+data class PaymentError(
     override val title: String?,
     override val message: String?,
     val payment: Payment?
