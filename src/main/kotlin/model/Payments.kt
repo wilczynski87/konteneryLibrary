@@ -28,7 +28,7 @@ data class Payment(
     fun toDto(): PaymentDto {
         return PaymentDto(
             paymentId = this.id.toString(),
-            amount = this.amount,
+            amount = this.amount.toString(),
             date = this.date,
             fromClientId = this.fromClient?.id,
             method = this.method,
@@ -44,8 +44,7 @@ data class Payment(
 @Serializable
 data class PaymentDto(
     val paymentId: String? = null,
-    @Serializable(with = BigDecimalSerializer::class)
-    val amount: BigDecimal? = null,
+    val amount: String? = null,
     @Serializable(with = LocalDateSerializer::class)
     val date: LocalDate? = null,
     val fromClientId: Long? = null,
@@ -55,21 +54,7 @@ data class PaymentDto(
     val title: String? = null,
     val forInvoices: List<String>? = null,
     val referenceNumber: String? = null,
-) {
-//    fun toPayment(): Payment {
-//        return Payment(
-//            id = this.paymentId?.toLongOrNull(),
-//            amount = this.amount ?: throw NullPointerException("toPayment, lack of 'AMOUNT'"),
-//            date = this.date ?: throw NullPointerException("toPayment, lack of 'DATE'"),
-//            fromClientId = this.fromClient?.id,
-//            method = this.method,
-//            toAccount = this.toAccount?.accountNumber,
-//            fromAccount = this.fromAccount,
-//            title = this.title,
-//            forInvoices = this.forInvoices.mapNotNull { it.invoiceNumber }
-//        )
-//    }
-}
+)
 
 @Serializable
 enum class PaymentMethod(val polishName: String) {
@@ -84,3 +69,9 @@ enum class PaymentMethod(val polishName: String) {
         }
     }
 }
+
+@Serializable
+data class PaymentForFinanceTable(
+    val date: String? = "",   // np. "2026-01-10"
+    val amount: Double? = null  // np. 284.55
+)
